@@ -1,13 +1,16 @@
 import React from 'react';
+import './Votes.css';
+import { connect } from 'react-redux';
+import {increment, decrement} from './actions/votes'
 
-export default function Votes({vote, upVote, downVote, redirectToError}){
+const Votes = ({ value, color, increment, decrement }) => {
   return (
-    <div>
-      <p>{vote}</p>
-      <button onClick={() => upVote()}>+</button>
-      <button onClick={() => downVote()}>-</button>
+    <div className="Vote">
+      <h1 style={{ color }}>{value}</h1>
+      <button onClick={() => this.props.increment()}>+</button>
+      <button onClick={this.props.decrement()}>-</button>
     </div>
-  )
-}
+  );
+};
 
-<button onClick={() => redirectToError()} >오류 페이지</button>
+export default Votes;

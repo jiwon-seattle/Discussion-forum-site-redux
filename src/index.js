@@ -1,30 +1,23 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { render } from 'react-dom';
-import { ConnectedRouter } from 'react-router-redux';
-import createBrowserHistory from 'history/createBrowserHistory';
-import { Provider } from "react-redux";
-import createStore from './store';
-import * as serviceWorker from './serviceWorker';
 
-const history = createBrowserHistory();
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-const store = createStore(history);
+import App from 'components/App';
+import postReducer from './reducers/Posts';
 
-render(
-  <Provider store = {store}>
-    <ConnectedRouter history ={history}>
-      <div>
-        <Route exact path="/" component={Vote} />
-      </div>
-    </ConnectedRouter>
-  </Provider>,
-  document.getElementById('root')
+const store = createStore(postReducer, window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__());
+
+ReactDOM.render(
+    <Provider store={store}>
+        <App />
+    </Provider>,
+    document.getElementById('root')
 );
-
 
 
 // If you want your app to work offline and load faster, you can change
 // unregister() to register() below. Note this comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
-serviceWorker.unregister();
+// serviceWorker.unregister();
